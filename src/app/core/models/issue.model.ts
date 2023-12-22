@@ -47,6 +47,7 @@ export class Issue {
   issueDisputes?: IssueDispute[];
   teamChosenSeverity?: string;
   teamChosenType?: string;
+  teamChosenResponse?: string;
   teamAccepted?: boolean;
 
   /** Fields for error messages during parsing of Github's issue description */
@@ -162,6 +163,7 @@ export class Issue {
 
     issue.teamChosenSeverity = testerResponseTemplate.teamChosenSeverity || null;
     issue.teamChosenType = testerResponseTemplate.teamChosenType || null;
+    issue.teamChosenResponse = testerResponseTemplate.teamChosenResponse || null;
 
     return issue;
   }

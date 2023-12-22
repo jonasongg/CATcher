@@ -13,6 +13,7 @@ interface TesterResponseParseResult {
   testerDisagree: boolean;
   teamChosenSeverity: string;
   teamChosenType: string;
+  teamChosenResponse: string;
 }
 
 const GITHUB_UI_EDIT_WARNING =
@@ -37,6 +38,7 @@ export const TesterResponseParser = coroutine(function* () {
   let testerDisagree = false;
   let teamChosenSeverity: string;
   let teamChosenType: string;
+  let teamChosenResponse: string;
   const testerResponses: TesterResponse[] = [];
 
   for (const response of responses) {
@@ -48,6 +50,8 @@ export const TesterResponseParser = coroutine(function* () {
       teamChosenSeverity = response.teamChose;
     } else if (response.title === 'type') {
       teamChosenType = response.teamChose;
+    } else if (response.title === 'response') {
+      teamChosenResponse = response.teamChose;
     }
 
     testerResponses.push(
@@ -66,7 +70,8 @@ export const TesterResponseParser = coroutine(function* () {
     testerResponses: testerResponses,
     testerDisagree: testerDisagree,
     teamChosenSeverity: teamChosenSeverity,
-    teamChosenType: teamChosenType
+    teamChosenType: teamChosenType,
+    teamChosenResponse: teamChosenResponse
   };
   return result;
 });
@@ -78,6 +83,7 @@ export class TesterResponseTemplate extends Template {
   comment: IssueComment;
   teamChosenSeverity?: string;
   teamChosenType?: string;
+  teamChosenResponse?: string;
 
   constructor(githubComments: GithubComment[]) {
     super(TesterResponseParser);
@@ -98,5 +104,6 @@ export class TesterResponseTemplate extends Template {
     this.testerDisagree = this.parseResult.testerDisagree;
     this.teamChosenSeverity = this.parseResult.teamChosenSeverity;
     this.teamChosenType = this.parseResult.teamChosenType;
+    this.teamChosenResponse = this.parseResult.teamChosenResponse;
   }
 }

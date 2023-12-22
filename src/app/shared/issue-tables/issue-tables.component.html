@@ -21,6 +21,19 @@
     <mat-cell *matCellDef="let issue"> {{ (issue.teamAssigned && issue.teamAssigned.id) || '-' }} </mat-cell>
   </ng-container>
 
+  <!-- Team Response Column -->
+  <ng-container matColumnDef="teamResponse">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Team's Response </mat-header-cell>
+    <mat-cell *matCellDef="let issue">
+      <span
+        (click)="$event.stopPropagation()"
+        [ngStyle]="this.labelService.setLabelStyle(this.labelService.getColorOfLabel('response', issue.teamChosenResponse))"
+      >
+        {{ issue.teamChosenResponse || '-' }}
+      </span>
+    </mat-cell>
+  </ng-container>
+
   <!-- Type Column -->
   <ng-container matColumnDef="type">
     <mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
