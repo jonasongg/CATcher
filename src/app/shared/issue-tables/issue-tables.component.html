@@ -27,9 +27,9 @@
     <mat-cell *matCellDef="let issue">
       <span
         (click)="$event.stopPropagation()"
-        [ngStyle]="this.labelService.setLabelStyle(this.labelService.getColorOfLabel('response', issue.teamResponse))"
+        [ngStyle]="this.labelService.setLabelStyle(this.labelService.getColorOfLabel('response', issue.teamChosenResponse))"
       >
-        {{ issue.teamResponse || '-' }}
+        {{ issue.teamChosenResponse || '-' }}
       </span>
     </mat-cell>
   </ng-container>
